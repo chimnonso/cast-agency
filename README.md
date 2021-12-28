@@ -7,6 +7,12 @@ The Casting Agency Project models a company that is responsible for creating mov
 
 This project is simply a workspace for practicing and showcasing different set of skills related with web development. These include data modelling, API design, authentication and authorization and cloud deployment.
 
+##### URL location for the hosted API
+API is hosted on
+```
+https://cast-agency-app.herokuapp.com
+```
+
 ## Getting Started
 
 The project adheres to the PEP 8 style guide and follows common best practices, including:
@@ -118,11 +124,6 @@ Use the following link to create users and sign them in. This way, you can gener
 https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=token&client_id={{YOUR_CLIENT_ID}}&redirect_uri={{YOUR_CALLBACK_URI}}
 ```
 
-##### URL location for the hosted API
-API is hosted on
-```
-https://cast-agency-app.herokuapp.com
-```
 
 #### Launching The App
 
