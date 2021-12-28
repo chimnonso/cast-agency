@@ -27,13 +27,16 @@ class Movie(db.Model):
         self.title = title
         self.release_date = release_date
 
+    # Insert into DB
     def insert(self):
         db.session.add(self)
         db.session.commit()
 
+    # Update a given record
     def update(self):
         db.session.commit()
 
+    # Delete a record from DB
     def delete(self):
         db.session.delete(self)
         db.session.commit()
@@ -64,13 +67,16 @@ class Actor(db.Model):
         self.gender = gender
         self.movie_id = movie_id
 
+    # Insert into DB
     def insert(self):
         db.session.add(self)
         db.session.commit()
 
+    # Update a given record
     def update(self):
         db.session.commit()
 
+    # Delete a record from DB
     def delete(self):
         db.session.delete(self)
         db.session.commit()

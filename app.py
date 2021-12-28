@@ -27,12 +27,19 @@ def create_app(test_config=None):
 
 		return response
 
+	# Test API
 	@app.route('/test')
 	def testing():
 		return jsonify({
             "success": True,
             "message": "welcome"
         })
+
+	'''
+	
+	Endpoints to GET, CREATE, UPDATE and DELETE a movie
+
+	'''
 
 	@app.route('/movies')
 	@requires_auth('get:movies')
@@ -115,7 +122,7 @@ def create_app(test_config=None):
 
 
 	'''
-	All Actors endpoints
+		Endpoints to GET, CREATE, UPDATE and DELETE actor
 
 	'''
 
@@ -225,9 +232,7 @@ def create_app(test_config=None):
 
 
 
-
-	
-
+	# Error Handlers
 	@app.errorhandler(400)
 	def bad_request(error):
 		return jsonify({
