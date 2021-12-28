@@ -18,11 +18,11 @@ def create_app(test_config=None):
 	def after_request(response):
 		response.headers.add(
 			'Access-Control-Allow-Headers',
-			'Content-Type, Authorization,true'
+			'Content-Type,Authorization'
 		)
 		response.headers.add(
 			'Access-Control-Allow-Methods',
-            'GET, POST, PATCH, DELETE, OPTIONS'
+            'GET,POST,PATCH,DELETE,OPTIONS'
 		)
 
 		return response
@@ -100,21 +100,17 @@ def create_app(test_config=None):
 	@app.route('/movies/<int:movie_id>', methods=["DELETE"])
 	@requires_auth('delete:movie')
 	def delete_movie(payload, movie_id):
-		movie = Movie.query.get(movie_id)
+		movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
 
 		if movie is None:
 			abort(404)
 
-		try:
-			movie.delete()
+		movie.delete()
 
-			return jsonify({
-				"success": True,
-				"deleted_movie_id": movie.id
-			})
-		
-		except Exception:
-			abort(500)
+		return jsonify({
+			"success": True,
+			"deleted_movie_id": movie.id
+		})
 
 
 
@@ -161,8 +157,6 @@ def create_app(test_config=None):
 		)
 
 		actor.insert()
-
-		print(actor)
 
 		return jsonify({
 			"success": True,
@@ -266,6 +260,14 @@ def create_app(test_config=None):
 			"error": auth_error.status_code,
 			"message": auth_error.error['description']
 		})
+
+	@app.errorhandler(500)
+	def internal_error(error):
+		return jsonify({
+			"success": False,
+			"message": "internal error",
+			"error": 500,
+		}), 500
 
 
 
