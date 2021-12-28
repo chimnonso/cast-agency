@@ -118,6 +118,12 @@ Use the following link to create users and sign them in. This way, you can gener
 https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=token&client_id={{YOUR_CLIENT_ID}}&redirect_uri={{YOUR_CALLBACK_URI}}
 ```
 
+##### URL location for the hosted API
+API is hosted on
+```
+https://cast-agency-app.herokuapp.com
+```
+
 #### Launching The App
 
 1. Initialize and activate a virtualenv:
