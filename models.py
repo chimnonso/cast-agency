@@ -1,4 +1,5 @@
 import os
+import re
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
@@ -7,8 +8,14 @@ db_name = "casting"
 db_path = f"postgresql://postgres:foobar@localhost:5432/{db_name}"
 db = SQLAlchemy()
 
+
 def setup_db(app, db_path=db_path):
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', db_path)
+
+    uri = os.getenv('DATABASE_URL', db_path)
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
